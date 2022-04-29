@@ -17,8 +17,7 @@ class TPQueue {
     return item;
   }
 
-  public:
-
+  public: 
   TPQueue() : head(nullptr), tail(nullptr) {}
 
   void push(const T& value) {
@@ -44,6 +43,8 @@ class TPQueue {
         }
     }
   T pop() {
+    if (!head || !tail)
+      throw int(1);
     ITEM* t = head->next;
     if (t)
       t->prev = nullptr;
