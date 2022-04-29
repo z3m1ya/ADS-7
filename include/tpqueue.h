@@ -16,21 +16,22 @@ class TPQueue {
     item->prev = nullptr;
     return item;
   }
-  
+
   public:
+
   TPQueue() : head(nullptr), tail(nullptr) {}
 
   void push(const T& value) {
         ITEM* t = head;
         ITEM* item = create(value);
-        while (t && t->value.prior >= value.prior)
+        while (t->value.prior >= value.prior && t)
             t = t->next;
-        if (!t && head) {
+        if (!t && !head) {
+            head = tail = item;
+        } else if (!t && head) {
             tail->next = item;
             item->prev = tail;
             tail = item;
-        } else if (!t && !head) {
-            head = tail = item;
         } else if (!t->prev) {
             head->prev = item;
             item->next = head;
@@ -43,8 +44,6 @@ class TPQueue {
         }
     }
   T pop() {
-    if (!head || !tail)
-      throw std::string("error!");
     ITEM* t = head->next;
     if (t)
       t->prev = nullptr;
