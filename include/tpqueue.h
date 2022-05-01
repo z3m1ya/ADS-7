@@ -4,7 +4,8 @@
 
 template<typename T>
 class TPQueue {
-private:
+    
+  private:
     struct ITEM {
         T value;
         ITEM* next, * prev;
@@ -16,8 +17,7 @@ private:
         item->next = item->prev = nullptr;
         return item;
     }
-
-public:
+  public: 
     TPQueue() : head(nullptr), tail(nullptr) {}
     void push(const T& value) {
         ITEM* t = head;
@@ -26,18 +26,15 @@ public:
             t = t->next;
         if (!t && !head) {
             head = tail = item;
-        }
-        else if (!t && head) {
+        } else if (!t && head) {
             tail->next = item;
             item->prev = tail;
             tail = item;
-        }
-        else if (!t->prev) {
+        } else if (!t->prev) {
             item->next = head;
             head->prev = item;
             head = item;
-        }
-        else {
+        } else {
             t->prev->next = item;
             item->prev = t->prev;
             t->prev = item;
@@ -62,4 +59,4 @@ struct SYM {
     int prior;
 };
 
-#endif
+#endif // INCLUDE_TPQUEUE_H_
