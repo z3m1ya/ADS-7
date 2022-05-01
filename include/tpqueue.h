@@ -1,8 +1,7 @@
 #ifndef INCLUDE_TPQUEUE_H_
 #define INCLUDE_TPQUEUE_H_
-#include <string>
 
-tlate<typename T>
+template<typename T>
 class TPQueue {
 private:
     struct ITEM {
@@ -19,6 +18,10 @@ private:
 
 public:
     TPQueue() : head(nullptr), tail(nullptr) {}
+    ~TPQueue() {
+        while (head)
+            pop();
+    }
     void push(const T& value) {
         ITEM* t = head;
         ITEM* item = create(value);
@@ -56,3 +59,10 @@ public:
         return value;
     }
 };
+
+struct SYM {
+    char ch;
+    int prior;
+};
+
+#endif
