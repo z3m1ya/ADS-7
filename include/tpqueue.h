@@ -13,7 +13,8 @@ class TPQueue {
     TPQueue::ITEM* create(const T& value) {
         ITEM* item = new ITEM;
         item->value = value;
-        item->next = item->prev = nullptr;
+        item->prev = nullptr;
+        item->next = item->prev;
         return item;
     }
 
@@ -36,18 +37,18 @@ class TPQueue {
             head = item;
         } else {
             t->prev->next = item;
+            item->next = t;
             item->prev = t->prev;
             t->prev = item;
             item->next = t;
         }
     }
     T pop() {
-        ITEM* t = head->next;
-        if (t)
+        if (head->next)
             t->prev = nullptr;
         T value = head->value;
         delete head;
-        head = t;
+        head = head->next;
         if (!head)
             tail = nullptr;
         return value;
