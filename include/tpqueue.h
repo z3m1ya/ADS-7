@@ -44,8 +44,10 @@ class TPQueue {
         }
     }
     T pop() {
-        if (head->next)
+        if (head->next) {
+            ITEM* t = head->next;
             t->prev = nullptr;
+        }
         T value = head->value;
         delete head;
         head = head->next;
